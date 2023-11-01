@@ -1,5 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function ShoppingForm() {
-    return <div>ShoppingForm</div>;
+export default function ShoppingForm({ addItem }) {
+    const [item, setItem] = useState("");
+    const [num, setNum] = useState(""); // quantity
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        addItem(item, num);
+        setItem("");
+        setNum("");
+    }
+
+    function handleItemChange(event) {
+        setItem(event.target.value);
+    }
+
+    function handleQuantityChange(event) {
+        setNum(event.target.value);
+    }
+
+    return (
+        <form action="#" method="POST" onSubmit={handleSubmit}>
+            <label htmlFor="item"></label>
+            <input type="text" id="item" name="item" value={item} onChange={handleItemChange} required />
+            <label htmlFor="quantity"></label>
+            <input type="number" id="quantity" name="quantity" value={num} onChange={handleQuantityChange} required />
+            <button type="submit">Add</button>
+        </form>
+    );
 }
