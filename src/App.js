@@ -24,7 +24,7 @@ function App() {
 
             <main>
                 <ShoppingForm />
-                <ShoppingList />
+                <ShoppingList items={shoppingList} />
             </main>
         </div>
     );
