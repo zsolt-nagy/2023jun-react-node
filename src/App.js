@@ -44,6 +44,22 @@ function App() {
             .then(loadData);
     }
 
+    function updateItem(id, itemName, quantity) {
+        fetch(`https://cgrf4m-8080.csb.app/api/list/${id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                item: itemName,
+                quantity,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+            mode: "cors",
+        })
+            .then((x) => x.json())
+            .then(loadData);
+    }
+
     return (
         <div className="App">
             <header className="App-header">
@@ -51,8 +67,8 @@ function App() {
             </header>
 
             <main>
-                <ShoppingForm addItem={addItem} />
-                <ShoppingList items={shoppingList} deleteItem={deleteItem} />
+                <ShoppingForm submitItem={addItem} />
+                <ShoppingList items={shoppingList} deleteItem={deleteItem} updateItem={updateItem} />
             </main>
         </div>
     );
