@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/2023jun-react-node/static/css/main.964fdded.css",
+    "main.js": "/2023jun-react-node/static/js/main.5d9e1ed3.js",
+    "index.html": "/2023jun-react-node/index.html",
+    "main.964fdded.css.map": "/2023jun-react-node/static/css/main.964fdded.css.map",
+    "main.5d9e1ed3.js.map": "/2023jun-react-node/static/js/main.5d9e1ed3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.964fdded.css",
+    "static/js/main.5d9e1ed3.js"
+  ]
+}
