@@ -4,9 +4,23 @@ import React, { useState, useEffect } from "react";
 
 import ShoppingForm from "./Components/ShoppingForm/ShoppingForm";
 import ShoppingList from "./Components/ShoppingList/ShoppingList";
+import Login from "./Components/Login/Login";
+import UserInfo from "./Components/UserInfo/UserInfo";
+import Register from "./Components/Register/Register";
 
 function App() {
     const [shoppingList, setShoppingList] = useState([]);
+    const [isLoggedIn, setLoggedIn] = useState(false); // TODO: temporary
+
+    // TODO: temporary
+    function pretendLoggedIn() {
+        setLoggedIn(true);
+    }
+
+    // TODO: temporary
+    function pretendLogout() {
+        setLoggedIn(false);
+    }
 
     function loadData() {
         fetch("https://cgrf4m-8080.csb.app/api/list")
@@ -60,16 +74,30 @@ function App() {
             .then(loadData);
     }
 
+    const LoggedInContent = (
+        <>
+            <UserInfo logoutCallback={pretendLogout} />
+            <ShoppingForm submitItem={addItem} />
+            <ShoppingList items={shoppingList} deleteItem={deleteItem} updateItem={updateItem} />
+        </>
+    );
+
+    const LoggedOutContent = (
+        <>
+            <Login loggedInCallback={pretendLoggedIn} />
+            <Register loggedInCallback={pretendLoggedIn} />
+        </>
+    );
+
+    const Content = isLoggedIn ? LoggedInContent : LoggedOutContent;
+
     return (
         <div className="App">
             <header className="App-header">
                 <h1>Shopping List</h1>
             </header>
 
-            <main>
-                <ShoppingForm submitItem={addItem} />
-                <ShoppingList items={shoppingList} deleteItem={deleteItem} updateItem={updateItem} />
-            </main>
+            <main>{Content}</main>
         </div>
     );
 }
