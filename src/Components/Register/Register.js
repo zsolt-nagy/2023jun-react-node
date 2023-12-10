@@ -22,6 +22,9 @@ export default function Register(props) {
         console.log(username, password1, password2);
         if (password1 === password2) {
             props.registerCallback(username, password1);
+            setUsername("");
+            setPassword1("");
+            setPassword2("");
         } else {
             alert("The two passwords do not match. Try again!");
         }

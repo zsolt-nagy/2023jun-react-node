@@ -11,6 +11,7 @@ import Register from "./Components/Register/Register";
 function App() {
     const [shoppingList, setShoppingList] = useState([]);
     const [isLoggedIn, setLoggedIn] = useState(false); // TODO: temporary
+    const [showRegister, setShowRegister] = useState(false);
 
     // TODO: temporary
     function pretendLoggedIn() {
@@ -20,6 +21,10 @@ function App() {
     // TODO: temporary
     function pretendLogout() {
         setLoggedIn(false);
+    }
+
+    function registerClicked() {
+        setShowRegister((oldShowRegister) => !oldShowRegister);
     }
 
     // TODO: temporary
@@ -103,8 +108,12 @@ function App() {
 
     const LoggedOutContent = (
         <>
-            <Login loggedInCallback={pretendLoggedIn} />
-            <Register registerCallback={pretendRegistration} />
+            {showRegister ? (
+                <Register registerCallback={pretendRegistration} />
+            ) : (
+                <Login loggedInCallback={pretendLoggedIn} />
+            )}
+            <button onClick={registerClicked}>{showRegister ? "Back to Login" : "Register"}</button>
         </>
     );
 
