@@ -22,6 +22,25 @@ function App() {
         setLoggedIn(false);
     }
 
+    // TODO: temporary
+    function pretendRegistration(username, password) {
+        fetch("https://cgrf4m-8080.csb.app/register", {
+            method: "POST",
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+            mode: "cors",
+        })
+            .then((x) => x.json())
+            .then((response) => {
+                console.log("registration response:", response);
+            });
+    }
+
     function loadData() {
         fetch("https://cgrf4m-8080.csb.app/api/list")
             .then((x) => x.json())
@@ -85,7 +104,7 @@ function App() {
     const LoggedOutContent = (
         <>
             <Login loggedInCallback={pretendLoggedIn} />
-            <Register loggedInCallback={pretendLoggedIn} />
+            <Register registerCallback={pretendRegistration} />
         </>
     );
 

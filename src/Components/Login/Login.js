@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     function handleUsernameChange(e) {
         setUsername(e.target.value);
@@ -14,6 +15,7 @@ export default function Login(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        setError("");
         console.log(username, password);
 
         fetch("https://cgrf4m-8080.csb.app/login/password", {
@@ -29,8 +31,10 @@ export default function Login(props) {
         })
             .then((x) => x.json())
             .then((response) => {
-                if (response?.status === true) {
+                if (response?.status === 200) {
                     props.loggedInCallback();
+                } else {
+                    setError(response.message);
                 }
             });
 
@@ -65,6 +69,7 @@ export default function Login(props) {
                     required
                 />
             </div>
+            <div className="error">{error}</div>
             <button type="submit" className="btn btn-primary">
                 Login
             </button>

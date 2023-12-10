@@ -20,6 +20,11 @@ export default function Register(props) {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(username, password1, password2);
+        if (password1 === password2) {
+            props.registerCallback(username, password1);
+        } else {
+            alert("The two passwords do not match. Try again!");
+        }
     }
 
     return (
@@ -40,7 +45,7 @@ export default function Register(props) {
             <div className="form-row">
                 <label htmlFor="password1">Password</label>
                 <input
-                    type="password1"
+                    type="password"
                     name="password1"
                     id="password1"
                     value={password1}
@@ -52,7 +57,7 @@ export default function Register(props) {
             <div className="form-row">
                 <label htmlFor="password2">Confirm Password</label>
                 <input
-                    type="password2"
+                    type="password"
                     name="password2"
                     id="password2"
                     value={password2}
